@@ -15,6 +15,7 @@ namespace BlogProjectCF.BusinessL.Extensions
         public static IServiceCollection ServicesCollectionCustom(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<AppSqlContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("DefaultConn")));
+
             return services;
         }
     }

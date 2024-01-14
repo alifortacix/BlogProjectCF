@@ -11,8 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Managers\" />
     <Folder Include="Helpers\" />
+    <Folder Include="Mapping\" />
     <Folder Include="Validations\" />
   </ItemGroup>
 
