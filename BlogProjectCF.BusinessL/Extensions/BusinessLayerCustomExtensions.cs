@@ -25,10 +25,9 @@ namespace BlogProjectCF.BusinessL.Extensions
             //services.AddDbContext<AppSqlContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("DefaultConn")));
             services.AddDbContext<AppSqlContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("DefaultConn")), ServiceLifetime.Scoped);
 
-
             services.AddScoped<IAuthorRepository, AuthorRepository>();
-            services.AddScoped<IArticleRepository, ArticleRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IArticleRepository, ArticleRepository>();
 
             services.AddScoped<IAuthorManager, AuthorManager>();
             services.AddScoped<ICategoryManager, CategoryManager>();

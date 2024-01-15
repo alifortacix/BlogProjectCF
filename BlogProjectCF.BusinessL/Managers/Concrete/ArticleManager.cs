@@ -1,5 +1,7 @@
-﻿using BlogProjectCF.BusinessL.Managers.Abstract;
+﻿using AutoMapper;
+using BlogProjectCF.BusinessL.Managers.Abstract;
 using BlogProjectCF.DataAccessL.Repositories.Abstract;
+using BlogProjectCF.Dtos.ArticleDtos;
 using BlogProjectCF.EntityL.Concrete;
 
 namespace BlogProjectCF.BusinessL.Managers.Concrete
@@ -7,14 +9,16 @@ namespace BlogProjectCF.BusinessL.Managers.Concrete
     public class ArticleManager : IArticleManager
     {
         private readonly IArticleRepository _articleRepository;
-
-        public ArticleManager(IArticleRepository articleRepository)
+        private readonly IMapper _mapper;
+        public ArticleManager(IArticleRepository articleRepository, IMapper mapper)
         {
             _articleRepository = articleRepository;
+            _mapper = mapper;
         }
 
-        public void MCreate(Article article)
+        public void MCreate(CreateArticleDto articleDto)
         {
+            Article article = _mapper.Map<Article>(articleDto);
             _articleRepository.Create(article);
         }
 
@@ -38,8 +42,9 @@ namespace BlogProjectCF.BusinessL.Managers.Concrete
             return _articleRepository.GetAllByCondition(predicate);
         }
 
-        public void MUpdate(Article article)
+        public void MUpdate(UpdateArticleDto articleDto)
         {
+            Article article = _mapper.Map<Article>(articleDto);
             _articleRepository.Update(article);
         }
     }

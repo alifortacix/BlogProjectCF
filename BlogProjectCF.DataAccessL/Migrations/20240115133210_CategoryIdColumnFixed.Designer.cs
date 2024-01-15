@@ -4,6 +4,7 @@ using BlogProjectCF.DataAccessL.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogProjectCF.DataAccessL.Migrations
 {
     [DbContext(typeof(AppSqlContext))]
-    partial class AppSqlContextModelSnapshot : ModelSnapshot
+    [Migration("20240115133210_CategoryIdColumnFixed")]
+    partial class CategoryIdColumnFixed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

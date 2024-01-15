@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BlogProjectCF.Dtos.ArticleDtos;
 using BlogProjectCF.Dtos.AuthorDtos;
 using BlogProjectCF.EntityL.Concrete;
 using System;
@@ -15,6 +16,8 @@ namespace BlogProjectCF.BusinessL.Mapping
         {
             CreateMap<Author, CreateAuthorDto>().ReverseMap();
             CreateMap<Author, UpdateAuthorDto>().ReverseMap();
+            CreateMap<Article, CreateArticleDto>().ReverseMap();
+            CreateMap<Article, UpdateArticleDto>().ReverseMap();
 
         }
     }

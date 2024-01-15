@@ -1,4 +1,5 @@
-﻿using BlogProjectCF.EntityL.Concrete;
+﻿using BlogProjectCF.Dtos.ArticleDtos;
+using BlogProjectCF.EntityL.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,8 @@ namespace BlogProjectCF.BusinessL.Managers.Abstract
 {
     public interface IArticleManager
     {
-        void MCreate(Article article);
-        void MUpdate(Article article);
+        void MCreate(CreateArticleDto article);
+        void MUpdate(UpdateArticleDto article);
         void MDelete(string id);
         Article MGet(string id);
         List<Article> MGetAll();

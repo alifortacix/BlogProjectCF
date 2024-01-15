@@ -12,10 +12,18 @@ namespace BlogProjectCF.DataAccessL.Contexts
         protected override void OnModelCreating(ModelBuilder builder) 
         {
             builder.Entity<Article>()
-                    .HasOne(b => b.Author)
-                    .WithMany(a => a.Articles)
-                    .HasForeignKey(b => b.AuthorId)
-                    .HasForeignKey(c => c.CategoryId);
+                .HasOne(b => b.Author)
+                .WithMany(a => a.Articles)
+                .HasForeignKey(b => b.AuthorId);
+
+            builder.Entity<Article>()
+                .HasOne(b => b.Category)
+                .WithMany(c => c.Articles)
+                .HasForeignKey(b => b.CategoryId);
+
+
+
+
 
             builder.Entity<Author>().Property(e=> e.Id).IsRequired();
             builder.Entity<Author>().Property(e => e.Username).HasMaxLength(25).IsRequired();
