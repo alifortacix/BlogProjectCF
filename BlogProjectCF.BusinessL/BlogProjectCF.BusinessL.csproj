@@ -8,12 +8,17 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BlogProjectCF.DataAccessL\BlogProjectCF.DataAccessL.csproj" />
+    <ProjectReference Include="..\BlogProjectCF.Dtos\BlogProjectCF.Dtos.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Helpers\" />
-    <Folder Include="Mapping\" />
-    <Folder Include="Validations\" />
+    <Folder Include="Validations\AuthorValidators\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="FluentValidation" Version="11.9.0" />
   </ItemGroup>
 
 </Project>

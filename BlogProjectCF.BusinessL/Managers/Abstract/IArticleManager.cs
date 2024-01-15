@@ -11,8 +11,8 @@ namespace BlogProjectCF.BusinessL.Managers.Abstract
     {
         void MCreate(Article article);
         void MUpdate(Article article);
-        void MDelete(int id);
-        Article MGet(int id);
+        void MDelete(string id);
+        Article MGet(string id);
         List<Article> MGetAll();
         List<Article> MGetAllByCondition(Func<Article, bool> predicate);
     }

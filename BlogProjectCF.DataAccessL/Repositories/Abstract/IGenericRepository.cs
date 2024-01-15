@@ -1,10 +1,4 @@
 ﻿using BlogProjectCF.EntityL.Abstract;
-using BlogProjectCF.EntityL.Concrete;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BlogProjectCF.DataAccessL.Repositories.Abstract
 {
@@ -12,8 +6,8 @@ namespace BlogProjectCF.DataAccessL.Repositories.Abstract
     {
         void Create(T entity);
         void Update(T entity);
-        void Delete(int id);
-        T Get(int id);
+        void Delete(string id);
+        T Get(string id);
         List<T> GetAll();
         List<T> GetAllByCondition(Func<T, bool> predicate);
     }

@@ -1,11 +1,6 @@
 ﻿using BlogProjectCF.BusinessL.Managers.Abstract;
 using BlogProjectCF.DataAccessL.Repositories.Abstract;
 using BlogProjectCF.EntityL.Concrete;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BlogProjectCF.BusinessL.Managers.Concrete
 {
@@ -23,12 +18,12 @@ namespace BlogProjectCF.BusinessL.Managers.Concrete
             _articleRepository.Create(article);
         }
 
-        public void MDelete(int id)
+        public void MDelete(string id)
         {
             _articleRepository.Delete(id);
         }
 
-        public Article MGet(int id)
+        public Article MGet(string id)
         {
             return _articleRepository.Get(id);
         }
