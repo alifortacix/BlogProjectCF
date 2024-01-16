@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BlogProjectCF.BusinessL.Helpers;
 using BlogProjectCF.BusinessL.Managers.Abstract;
 using BlogProjectCF.DataAccessL.Repositories.Abstract;
 using BlogProjectCF.Dtos.ArticleDtos;
@@ -19,6 +20,13 @@ namespace BlogProjectCF.BusinessL.Managers.Concrete
         public void MCreate(CreateArticleDto articleDto)
         {
             Article article = _mapper.Map<Article>(articleDto);
+            string savePath = "/Uploads/Articles/";
+            if (articleDto.Image != null)
+            {
+                string result = FileHelper.SaveFile(articleDto.Image, savePath);
+                if (result != "FileSaveError")
+                    article.ImageUrl = savePath + result;
+            }
             _articleRepository.Create(article);
         }
 
@@ -42,10 +50,28 @@ namespace BlogProjectCF.BusinessL.Managers.Concrete
             return _articleRepository.GetAllByCondition(predicate);
         }
 
+        public List<Article> MGetArticlesWithCategoryAndAuthor()
+        {
+            return _articleRepository.GetArticlesWithCategoryAndAuthor();
+        }
+
         public void MUpdate(UpdateArticleDto articleDto)
         {
-            Article article = _mapper.Map<Article>(articleDto);
-            _articleRepository.Update(article);
+            Article updatedArticle = _articleRepository.Get(articleDto.Id.ToString());
+            string oldFilePath = updatedArticle.ImageUrl;
+
+            _mapper.Map(articleDto, updatedArticle);
+
+            updatedArticle.UpdatedDate = DateTime.Now;
+
+            if (articleDto.Image != null)
+            {
+                var savedImagePath = FileHelper.SaveFile(articleDto.Image, "/Uploads/Authors/");
+                updatedArticle.ImageUrl = "/Uploads/Authors/" + savedImagePath;
+                bool isDeleted = FileHelper.DeleteFile(oldFilePath);
+            }
+
+            _articleRepository.Update(updatedArticle);
         }
     }
 }

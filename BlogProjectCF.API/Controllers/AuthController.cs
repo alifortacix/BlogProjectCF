@@ -1,4 +1,5 @@
-﻿using BlogProjectCF.BusinessL.Managers.Abstract;
+﻿using BlogProjectCF.BusinessL.Helpers;
+using BlogProjectCF.BusinessL.Managers.Abstract;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -23,9 +24,13 @@ namespace BlogProjectCF.API.Controllers
         [HttpPost("Login")]
         public IActionResult Login(string username, string password)
         {
-            var user = _authorManager.MGetAuthorByUsernameAndPassword(username, password);
+            var user = _authorManager.MGetAuthorByUsername(username);
             if (user == null)
                 return BadRequest("User Not Found");
+            bool hashedPassword = PasswordHashHelper.VerifyPassword(password, user.Password);
+
+            if (!hashedPassword)
+                return BadRequest("Password Or Username Incorrect");
 
             var token = GenerateJwtToken(username);
             return Ok(new { Token = token });

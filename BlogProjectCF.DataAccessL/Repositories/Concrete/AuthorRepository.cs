@@ -4,7 +4,7 @@ using BlogProjectCF.EntityL.Concrete;
 
 namespace BlogProjectCF.DataAccessL.Repositories.Concrete
 {
-    public class AuthorRepository : GenericRepository<Author> , IAuthorRepository
+    public class AuthorRepository : GenericRepository<Author>, IAuthorRepository
     {
         private readonly AppSqlContext _context;
         public AuthorRepository(AppSqlContext context) : base(context)
@@ -12,9 +12,9 @@ namespace BlogProjectCF.DataAccessL.Repositories.Concrete
             _context = context;
         }
 
-        public Author GetAuthorByUsernameAndPassword(string username, string password)
+        public Author GetAuthorByUsername(string username)
         {
-            return _context.Authors.SingleOrDefault(x => x.Username == username && x.Password == password);
+            return _context.Authors.SingleOrDefault(x => x.Username == username);
         }
     }
 }

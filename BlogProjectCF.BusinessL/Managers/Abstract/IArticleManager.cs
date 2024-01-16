@@ -1,10 +1,5 @@
 ﻿using BlogProjectCF.Dtos.ArticleDtos;
 using BlogProjectCF.EntityL.Concrete;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BlogProjectCF.BusinessL.Managers.Abstract
 {
@@ -16,5 +11,6 @@ namespace BlogProjectCF.BusinessL.Managers.Abstract
         Article MGet(string id);
         List<Article> MGetAll();
         List<Article> MGetAllByCondition(Func<Article, bool> predicate);
+        List<Article> MGetArticlesWithCategoryAndAuthor();
     }
 }

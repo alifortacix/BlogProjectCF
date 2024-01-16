@@ -1,16 +1,12 @@
-﻿using BlogProjectCF.EntityL.Concrete;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BlogProjectCF.Dtos.CategoryDtos;
+using BlogProjectCF.EntityL.Concrete;
 
 namespace BlogProjectCF.BusinessL.Managers.Abstract
 {
     public interface ICategoryManager
     {
-        void MCreate(Category category);
-        void MUpdate(Category category);
+        void MCreate(CreateCategoryDto category);
+        void MUpdate(UpdateCategoryDto category);
         void MDelete(string id);
         Category MGet(string id);
         List<Category> MGetAll();

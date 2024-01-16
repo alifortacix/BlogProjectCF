@@ -11,30 +11,48 @@ namespace BlogProjectCF.BusinessL.Helpers
                 if (file == null || file.Length == 0)
                     return "FileSaveError";
 
-                // wwwroot klasörüne dosya kaydetme
+
                 string webRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
-                webRootPath = webRootPath.Replace("\\", "/"); // Gerekirse
-
+                webRootPath = webRootPath.Replace("\\", "/");
+                Guid guid = Guid.NewGuid();
                 string savePathInWwwRoot = $"{webRootPath}/{savePath}";
-
                 // Dizin yoksa oluştur
                 if (!Directory.Exists(savePathInWwwRoot))
                     Directory.CreateDirectory(savePathInWwwRoot);
 
-                string filePath = $"{savePathInWwwRoot}/{file.FileName}";
+                string fileName = $"{guid}{Path.GetExtension(file.FileName)}";
+
+                string filePath = $"{savePathInWwwRoot}/{fileName}";
 
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
                     file.CopyToAsync(stream);
                 }
 
-                return file.FileName;
+                return fileName;
             }
             catch (Exception ex)
             {
                 return $"Error: {ex.Message}";
             }
 
+        }
+
+        public static bool DeleteFile(string path)
+        {
+            string webRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+            webRootPath = webRootPath.Replace("\\", "/");
+            try
+            {
+                File.Delete(webRootPath + path);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"File Cannot Be Deleted! Error Message: {ex.Message}");
+                return false;
+            }
+
+            return true;
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using BlogProjectCF.BusinessL.Managers.Abstract;
-using BlogProjectCF.BusinessL.Managers.Concrete;
 using BlogProjectCF.Dtos.ArticleDtos;
 using FluentValidation;
 using FluentValidation.Results;
@@ -22,12 +21,20 @@ namespace BlogProjectCF.API.Controllers
             _updateValidator = updateValidator;
         }
 
+        [HttpGet("GetArticlesWithCategoryAndAuthor")]
+        public IActionResult GetArticlesWithCategoryAndAuthor()
+        {
+            var data = _articleManager.MGetArticlesWithCategoryAndAuthor();
+            return Ok(data);
+        }
+
         [HttpGet]
-        public IActionResult Get() 
+        public IActionResult Get()
         {
             var data = _articleManager.MGetAll();
             return Ok(data);
         }
+
 
         [HttpGet("{id}")]
         public IActionResult Get(string id)

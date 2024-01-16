@@ -1,5 +1,7 @@
 ﻿using BlogProjectCF.BusinessL.Managers.Abstract;
-using Microsoft.AspNetCore.Http;
+using BlogProjectCF.Dtos.CategoryDtos;
+using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogProjectCF.API.Controllers
@@ -9,10 +11,13 @@ namespace BlogProjectCF.API.Controllers
     public class CategoriesController : ControllerBase
     {
         private readonly ICategoryManager _categoryManager;
-
-        public CategoriesController(ICategoryManager categoryManager)
+        private readonly IValidator<CreateCategoryDto> _createCategoryValidator;
+        private readonly IValidator<UpdateCategoryDto> _updateCategoryValidator;
+        public CategoriesController(ICategoryManager categoryManager, IValidator<CreateCategoryDto> createCategoryValidator, IValidator<UpdateCategoryDto> updateCategoryValidator)
         {
             _categoryManager = categoryManager;
+            _createCategoryValidator = createCategoryValidator;
+            _updateCategoryValidator = updateCategoryValidator;
         }
 
         [HttpGet]
@@ -30,14 +35,24 @@ namespace BlogProjectCF.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post()
+        public IActionResult Post([FromForm] CreateCategoryDto createCategoryDto)
         {
+            ValidationResult model = _createCategoryValidator.Validate(createCategoryDto);
+            if (!model.IsValid)
+                return BadRequest(model.Errors);
+
+            _categoryManager.MCreate(createCategoryDto);
             return Ok("Successfully Created");
         }
 
         [HttpPut]
-        public IActionResult Put()
+        public IActionResult Put([FromForm] UpdateCategoryDto updateCategoryDto)
         {
+            ValidationResult model = _updateCategoryValidator.Validate(updateCategoryDto);
+            if (!model.IsValid)
+                return BadRequest(model.Errors);
+
+            _categoryManager.MUpdate(updateCategoryDto);
             return Ok("Successfully Updated");
         }
 
